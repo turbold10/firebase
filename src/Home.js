@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useFetchData } from "./useFetchData";
 
-export const Home = () => {
+export const Home = () => {    
     return (
         <div>
             <h1> Home </h1>

@@ -3,7 +3,10 @@ import { useEffect, useState, useRef, useContext } from "react";
 import { auth } from './firebase'
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from "./userContext";
-// import { useFetchData } from "./useFetchData";
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import TextField from '@mui/material/TextField'
 
 export const Login = () => {
   const { setUserData, userData } = useContext(UserContext);
@@ -30,7 +33,7 @@ export const Login = () => {
   const verify = async () => {
     try {
       const result = await confirmationResult.current.confirm(password)
-      console.log(result.user.phoneNumber,result.user.uid)
+      console.log(result.user.phoneNumber, result.user.uid)
       setUserData(result.user)
       console.log(userData)
       alert('login sucessful')
@@ -43,10 +46,17 @@ export const Login = () => {
 
   return (
     <div>
-      <input value={num} onChange={(e) => setNum(e.target.value)} />
-      <button onClick={login}> login </button>
-      <input value={password} onChange={(e) => { setPassword(e.target.value) }} />
-      <button onClick={verify}> verify </button>
+      <TextField
+        helperText="Please enter your phone number"
+        id="demo-helper-text-misaligned"
+        label="Phone number"
+        value={num} onChange={(e) => { setNum(e.target.value) }}
+      />
+      <Button onClick={login} variant="contained" endIcon={<SendIcon />}>
+        Send
+      </Button>
+      <OutlinedInput placeholder="Please enter here" value={password} onChange={(e) => { setPassword(e.target.value) }} />
+      <Button variant="outlined" onClick={verify} > Verify </Button>
       <div id='recaptcha-container'></div>
     </div>
   );
